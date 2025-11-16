@@ -5,16 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>多和楽杯2025 写真・動画アップロード</title>
 
-  <!-- Tailwind（CDN版） -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- フォント -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -24,186 +21,149 @@
       font-family: 'Poppins', 'Noto Sans JP', system-ui, sans-serif;
       letter-spacing: 0.08em;
     }
-
-    /* ✨キラッと光るバッジ */
-    .shine-badge {
+    .tw-badge-shine {
       position: relative;
       overflow: hidden;
     }
-    .shine-badge::after {
+    .tw-badge-shine::after {
       content: "";
       position: absolute;
       top: 0;
       left: -150%;
-      width: 40%;
+      width: 50%;
       height: 100%;
       background: linear-gradient(
-        110deg,
+        120deg,
         transparent 0%,
-        rgba(255, 255, 255, 0.65) 50%,
+        rgba(255, 255, 255, 0.9) 50%,
         transparent 100%
       );
-      transform: skewX(-20deg);
-      animation: shine 1.8s infinite;
+      animation: shine 1.6s infinite;
     }
     @keyframes shine {
-      0% {
-        left: -150%;
-      }
-      45% {
-        left: 120%;
-      }
-      100% {
-        left: 120%;
-      }
+      0%   { transform: translateX(0); opacity: 0; }
+      35%  { opacity: 1; }
+      100% { transform: translateX(350%); opacity: 0; }
     }
   </style>
 </head>
+<body class="bg-gradient-to-b from-emerald-50 via-emerald-50/80 to-white min-h-screen flex items-center justify-center px-4 py-10">
 
-<body class="bg-gradient-to-b from-emerald-50 via-teal-50 to-white min-h-screen px-4 py-8">
-  <main class="max-w-3xl mx-auto">
+  <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 max-w-md w-full border border-emerald-100">
     <!-- ヘッダー -->
-    <header class="mb-8 text-center">
-      <p
-        class="shine-badge inline-flex items-center gap-3 px-6 py-2 rounded-full
-               bg-gradient-to-r from-emerald-400 to-emerald-600
-               text-white font-bold text-lg shadow-lg shadow-emerald-300/40
-               tracking-wide border border-white/40"
-      >
-        <span class="text-xl">🏌️‍♂️</span>
-        多和楽杯2025 コンペ
-      </p>
-
-      <h1 class="title-font text-2xl md:text-3xl font-bold text-slate-900 mt-4">
+    <div class="flex flex-col items-center mb-6">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold tw-badge-shine shadow-sm">
+        <span class="text-lg">🏌️‍♂️</span>
+        <span>多和楽杯2025 コンペ</span>
+      </div>
+      <h1 class="title-font text-2xl font-bold text-center text-slate-900 mt-3">
         写真・動画アップロード
       </h1>
-      <p class="mt-3 text-sm md:text-base text-slate-600">
+      <p class="text-sm text-center text-slate-600 mt-2">
         コンペ当日のベストショットを、ここからまとめてアップロードできます。
       </p>
-    </header>
+    </div>
 
-    <!-- カード -->
-    <section
-      class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-emerald-100 px-6 py-7 md:px-8 md:py-8"
-    >
-      <form id="uploadForm" class="space-y-6">
-        <!-- 名前 -->
-        <div>
-          <label class="block text-sm font-semibold text-slate-800 mb-1">
-            お名前 <span class="text-red-500">*</span>
-          </label>
-          <input
-            id="nameInput"
-            type="text"
-            required
-            class="w-full border border-slate-200 rounded-2xl px-3.5 py-2.5 text-sm
-                   focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
-                   bg-slate-50/60"
-            placeholder="多和楽 太郎"
-          />
-        </div>
-
-        <!-- コメント -->
-        <div>
-          <label class="block text-sm font-semibold text-slate-800 mb-1">
-            コメント（任意）
-          </label>
-          <textarea
-            id="commentInput"
-            rows="3"
-            class="w-full border border-slate-200 rounded-2xl px-3.5 py-2.5 text-sm
-                   focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
-                   bg-slate-50/60"
-            placeholder=写真のコメントなどあれば、お願いします！"
-          ></textarea>
-        </div>
-
-        <!-- ファイル選択 -->
-        <div>
-          <label class="block text-sm font-semibold text-slate-800 mb-1">
-            写真・動画（複数選択可） <span class="text-red-500">*</span>
-          </label>
-          <div
-            class="border border-dashed border-emerald-300 rounded-2xl px-4 py-3
-                   bg-emerald-50/60 flex flex-col gap-2 text-sm text-slate-700"
-          >
-            <input
-              id="fileInput"
-              type="file"
-              accept="image/*,video/*"
-              multiple
-              required
-              class="w-full text-sm bg-transparent"
-            />
-            <p class="text-xs text-slate-500">
-              1回につき複数ファイル選択OKです。画像（jpg / png）、動画（mp4 / mov など）に対応しています。
-            </p>
-          </div>
-        </div>
-
-        <!-- 進行状況（バー＆％） -->
-        <div id="progressWrapper" class="mt-2 hidden">
-          <div class="flex items-center justify-between text-xs text-slate-600 mb-1">
-            <span id="progressLabel">アップロード準備中…</span>
-            <span id="progressPercent">0%</span>
-          </div>
-          <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-            <div
-              id="progressBar"
-              class="h-2 rounded-full bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500 transition-all"
-              style="width: 0%;"
-            ></div>
-          </div>
-        </div>
-
-        <!-- ボタン -->
-        <button
-          type="submit"
-          class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500
-                 text-white rounded-full text-sm font-semibold tracking-wide
-                 shadow-lg shadow-emerald-300/50 hover:brightness-105 transition
-                 disabled:opacity-60 disabled:cursor-not-allowed"
-        >
-          アップロードする
-        </button>
-      </form>
-
-      <!-- メッセージ -->
-      <p id="status" class="text-center text-sm mt-4 text-slate-600 min-h-[1.5rem]"></p>
-
-      <!-- ギャラリーボタン -->
-      <div class="mt-4">
-        <a
-          href="https://tawaracup-2025-gallery.netlify.app/"
-          class="block w-full text-center py-2.5 border border-emerald-300 text-emerald-700
-                 rounded-full text-sm font-semibold hover:bg-emerald-50 transition"
-        >
-          ギャラリーを見る
-        </a>
+    <!-- フォーム -->
+    <form id="uploadForm" class="space-y-5">
+      <!-- 名前 -->
+      <div>
+        <label class="block text-sm font-semibold text-slate-800 mb-1">
+          お名前 <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="nameInput"
+          type="text"
+          required
+          class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          placeholder="多和楽 太郎"
+        />
       </div>
-    </section>
 
-    <p class="mt-6 text-center text-[11px] text-slate-400">
-      © 2025 多和楽杯コンペ実行委員会
-    </p>
-  </main>
+      <!-- コメント -->
+      <div>
+        <label class="block text-sm font-semibold text-slate-800 mb-1">
+          コメント（任意）
+        </label>
+        <textarea
+          id="commentInput"
+          rows="3"
+          class="w-full border border-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+          placeholder="楽しかったです！など一言お願いします"
+        ></textarea>
+      </div>
+
+      <!-- ファイル -->
+      <div>
+        <label class="block text-sm font-semibold text-slate-800 mb-1">
+          写真・動画（複数選択可） <span class="text-red-500">*</span>
+        </label>
+        <input
+          id="fileInput"
+          type="file"
+          accept="image/*,video/*"
+          multiple
+          required
+          class="w-full text-sm"
+        />
+        <p class="text-xs text-slate-500 mt-1">
+          1回につき複数ファイル選択OKです。画像（jpg / png）、動画（mp4 / mov など）に対応しています。
+        </p>
+      </div>
+
+      <!-- プログレス表示 -->
+      <div id="progressWrapper" class="hidden">
+        <div class="flex justify-between text-xs text-slate-600 mb-1">
+          <span>アップロード進行状況</span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+          <div id="progressBar" class="h-2 bg-emerald-500 rounded-full" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- 送信ボタン -->
+      <button
+        type="submit"
+        class="w-full py-3 bg-emerald-600 text-white rounded-full text-sm font-semibold tracking-wide shadow-lg hover:bg-emerald-700 transition disabled:opacity-60 disabled:cursor-not-allowed"
+      >
+        アップロードする
+      </button>
+    </form>
+
+    <!-- ステータス表示 -->
+    <p id="status" class="text-center text-sm mt-4 text-slate-600 min-h-[1.5rem]"></p>
+
+    <!-- 下部ボタン -->
+    <div class="mt-4 space-y-2">
+      <a
+        href="https://tawaracup-2025-gallery.netlify.app/"
+        class="block w-full text-center py-2.5 border border-emerald-300 text-emerald-700 rounded-full text-sm font-semibold hover:bg-emerald-50 transition"
+      >
+        📸 ギャラリーを見る
+      </a>
+      <a
+        href="https://tawara-golf.netlify.app/"
+        class="block w-full text-center py-2.5 border border-slate-200 bg-slate-800 text-white rounded-full text-sm font-semibold hover:bg-slate-700 transition"
+      >
+        🏠 本サイトへ戻る
+      </a>
+    </div>
+  </div>
 
   <script>
-    // ★ Cloudinary 設定
+    // Cloudinary 設定
     const CLOUD_NAME = "dpef3dzrk";
-    const UPLOAD_PRESET = "tawarahai-2025"; // あなたの Upload preset 名
+    const UPLOAD_PRESET = "tawarahai-2025";
 
     const form = document.getElementById("uploadForm");
     const nameInput = document.getElementById("nameInput");
     const commentInput = document.getElementById("commentInput");
     const fileInput = document.getElementById("fileInput");
     const statusEl = document.getElementById("status");
-
-    // 進捗表示用要素
     const progressWrapper = document.getElementById("progressWrapper");
     const progressBar = document.getElementById("progressBar");
     const progressPercent = document.getElementById("progressPercent");
-    const progressLabel = document.getElementById("progressLabel");
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -217,29 +177,24 @@
       const name = nameInput.value.trim();
       const comment = commentInput.value.trim();
 
-      // 初期化
-      statusEl.textContent = `アップロードを開始します… (${files.length}件)`;
-      const button = form.querySelector("button");
+      statusEl.textContent = `アップロード中… (${files.length}件)`;
+      const button = form.querySelector("button[type='submit']");
       button.disabled = true;
 
       progressWrapper.classList.remove("hidden");
       progressBar.style.width = "0%";
       progressPercent.textContent = "0%";
-      progressLabel.textContent = "アップロード準備中…";
 
-      const totalFiles = files.length;
       let successCount = 0;
 
-      // 1ファイルずつアップロード（XMLHttpRequest を使って進捗取得）
-      for (let i = 0; i < totalFiles; i++) {
+      for (let i = 0; i < files.length; i++) {
         const file = files[i];
 
-        // Cloudinary 用 FormData
         const formData = new FormData();
         formData.append("file", file);
         formData.append("upload_preset", UPLOAD_PRESET);
-        formData.append("folder", "tawarahai-2025"); // フォルダ名
-        formData.append("tags", "tawarahai2025"); // ギャラリー用タグ
+        formData.append("folder", "tawarahai-2025");
+        formData.append("tags", "tawarahai2025");
 
         if (name || comment) {
           const caption = encodeURIComponent(name || "");
@@ -247,64 +202,34 @@
           formData.append("context", `caption=${caption}|alt=${alt}`);
         }
 
-        progressLabel.textContent = `アップロード中… ${i + 1} / ${totalFiles}`;
-
         try {
-          await new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open(
-              "POST",
-              `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`
-            );
+          const res = await fetch(
+            `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`,
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
 
-            // ファイル単位の進捗 -> 全体の％に換算
-            xhr.upload.onprogress = (event) => {
-              if (event.lengthComputable) {
-                const fileRatio = event.loaded / event.total; // 0〜1
-                const overall =
-                  ((i + fileRatio) / totalFiles) * 100; // 全体の％
+          const data = await res.json();
 
-                const percent = Math.min(100, Math.round(overall));
-                progressBar.style.width = percent + "%";
-                progressPercent.textContent = percent + "%";
-              }
-            };
-
-            xhr.onload = () => {
-              try {
-                const data = JSON.parse(xhr.responseText);
-                if (xhr.status >= 200 && xhr.status < 300 && data.secure_url) {
-                  successCount++;
-                  console.log("Uploaded:", data.secure_url);
-                  resolve();
-                } else {
-                  console.error("Upload error:", data);
-                  reject(new Error("Upload failed"));
-                }
-              } catch (err) {
-                console.error("JSON parse error:", err);
-                reject(err);
-              }
-            };
-
-            xhr.onerror = () => {
-              console.error("Network / XHR error");
-              reject(new Error("Network error"));
-            };
-
-            xhr.send(formData);
-          });
+          if (data.secure_url) {
+            successCount++;
+            console.log("Uploaded:", data.secure_url);
+          } else {
+            console.error("Upload error:", data);
+          }
         } catch (err) {
-          console.error("Upload error for file", file.name, err);
-          // 失敗しても次のファイルには進む
+          console.error("Fetch error:", err);
         }
+
+        const progress = Math.round(((i + 1) / files.length) * 100);
+        progressBar.style.width = `${progress}%`;
+        progressPercent.textContent = `${progress}%`;
+        statusEl.textContent = `アップロード中… ${i + 1} / ${files.length}`;
       }
 
-      // 完了メッセージ
       if (successCount > 0) {
-        progressBar.style.width = "100%";
-        progressPercent.textContent = "100%";
-        progressLabel.textContent = "アップロード完了";
         statusEl.textContent =
           "アップロードありがとうございました！ ギャラリーは下のボタンからご覧いただけます。";
       } else {
@@ -314,6 +239,9 @@
 
       form.reset();
       button.disabled = false;
+      setTimeout(() => {
+        progressWrapper.classList.add("hidden");
+      }, 1200);
     });
   </script>
 </body>
