@@ -165,12 +165,11 @@
   </main>
 
   <script>
-    // Cloudinary設定
+    // Cloudinary設定（ここは「動いていた時」と同じにする）
     const CLOUD_NAME = "dpef3dzrk";
-    const UPLOAD_PRESET = "tawarahai-2025";   // 既存のアップロードプリセット
-    const UPLOAD_FOLDER = "tawarahai-2025";
-    // タグはハイフン無し＆有りの両方を付ける
-    const UPLOAD_TAGS = ["tawarahai2025", "tawarahai-2025"];
+    const UPLOAD_PRESET = "tawarahai-2025";   // 既存プリセット
+    const UPLOAD_FOLDER = "tawarahai-2025";   // フォルダ
+    const UPLOAD_TAG = "tawarahai2025";       // ★タグはハイフン無しで統一
 
     const form = document.getElementById("uploadForm");
     const nameInput = document.getElementById("nameInput");
@@ -210,8 +209,7 @@
         formData.append("file", file);
         formData.append("upload_preset", UPLOAD_PRESET);
         formData.append("folder", UPLOAD_FOLDER);
-        // タグをカンマ区切りで両方付与
-        formData.append("tags", UPLOAD_TAGS.join(","));
+        formData.append("tags", UPLOAD_TAG); // ★タグは1つだけ
 
         if (name || comment) {
           const caption = encodeURIComponent(name || "");
@@ -246,7 +244,7 @@
 
       if (successCount > 0) {
         statusEl.textContent =
-          "アップロードありがとうございました！ ギャラリーは下の「ギャラリーを見る」ボタンからご覧いただけます。";
+          "アップロードありがとうございました！ 下の「ギャラリーを見る」から確認できます。";
       } else {
         statusEl.textContent =
           "アップロードに失敗しました。時間をおいて再度お試しください。";
